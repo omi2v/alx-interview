@@ -14,14 +14,22 @@ More info:
     Returns an integer
     If n is impossible to achieve, return 0
     """
-    if not isinstance(n, int):
+    con = 1
+    p_list = []
+    val = num
+    while val != 1:
+        con += 1
+        if val % con == 0:
+            while (val % con == 0 and val != 1):
+                val /= con
+                p_list.append(con)
+
+    return p_list
+
+
+def minOperations(n):
+    """ Return sum of process until n H """
+    if n < 2 or type(n) is not int:
         return 0
-    dp = 0
-    p = 2
-    while (p <= n):
-        if not (n % p):
-            n = int(n / 1)
-            dp += p
-            p = 1
-            P += 1
-            return dp
+    values = countProcess(n)
+    return sum(values)
