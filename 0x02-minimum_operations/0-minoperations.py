@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""
+
+
+""" minimum operation that find single character """
+def minOperations(n):
+    """
 In a text file, there is a single character H.
 Your text editor can execute only two operations in this file:
 Copy All and Paste. Given a number n, write a method that calculates
@@ -9,15 +13,15 @@ More info:
     Prototype: def minOperations(n)
     Returns an integer
     If n is impossible to achieve, return 0
-"""
-def minOperations(n, int):
+    """
+    if not isinstance(n, int):
         return 0
     dp = 0
-    i = 2
-    while(i <= n):
-        if not (n % i):
-            n = int(n / i)
-            dp += i
-            i = 1
-            i += 1
+    p = 2
+    while (p <= n):
+        if not (n % p):
+            n = int(n / 1)
+            dp += p
+            p = 1
+            P += 1
             return dp
