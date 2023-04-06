@@ -1,8 +1,4 @@
 #!/usr/bin/python3
-
-
-""" minimum operation that find single character """
-def minOperations(n):
     """
 In a text file, there is a single character H.
 Your text editor can execute only two operations in this file:
@@ -14,6 +10,8 @@ More info:
     Returns an integer
     If n is impossible to achieve, return 0
     """
+    def countProcess(num):
+    """ Return list of process until n H """
     con = 1
     p_list = []
     val = num
