@@ -1,21 +1,22 @@
 #!/usr/bin/python3
 """
-Write a script that reads stdin line by line and computes metrics:
+Task - Script that reads stdin line by line and computes metrics
 """
+
 import sys
 
 
 if __name__ == "__main__":
-    status_codes = {"200": 0,
-            "301": 0,
-            "400": 0,
-            "401": 0,
-            "403": 0,
-            "404": 0,
-            "405": 0,
-            "500": 0,}
+    st_code = {"200": 0,
+               "301": 0,
+               "400": 0,
+               "401": 0,
+               "403": 0,
+               "404": 0,
+               "405": 0,
+               "500": 0}
     count = 1
-    total_file_size = 0
+    file_size = 0
 
     def parse_line(line):
         """ Read, parse and grab data"""
