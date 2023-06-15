@@ -14,20 +14,17 @@ Your solution’s runtime will be evaluated in this task
 
 
 def makeChange(coins, total):
-    """
-    this is for checking if total is less or not
-    """
     if total <= 0:
         return 0
 
-    dp = [float('inf')] * (total + 1)
-    dp[0] = 0
+    coins.sort(reverse=True)  # Sort coins in descending order
 
+    num_coins = 0
     for coin in coins:
-        for i in range(coin, total + 1):
-            dp[i] = min(dp[i], dp[i - coin] + 1)
+        num_coins += total // coin  # Add the maximum number of coins of this
+        total %= coin  # Update the remaining total
 
-    if dp[total] == float('inf'):
+    if total != 0:
         return -1
 
-    return dp[total]
+    return num_coins
