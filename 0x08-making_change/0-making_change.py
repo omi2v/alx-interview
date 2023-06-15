@@ -14,6 +14,9 @@ Your solution’s runtime will be evaluated in this task
 
 
 def makeChange(coins, total):
+    """
+    this is for checking if total is less or not
+    """
     if total <= 0:
         return 0
 
