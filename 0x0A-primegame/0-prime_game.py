@@ -1,60 +1,42 @@
 #!/usr/bin/python3
-"""
-Prototype: def isWinner(x, nums)
-where x is the number of rounds and nums is an array of n
-Return: name of the player that won the most rounds
-If the winner cannot be determined, return None
-You can assume n and x will not be larger than 10000
-You cannot import any packages in this task
-"""
-def sieve_of_eratosthenes(n):
-    # Generate all prime numbers up to n
-    primes = [True] * (n + 1)
-    primes[0] = primes[1] = False
-
-    p = 2
-    while p * p <= n:
-        if primes[p]:
-            for i in range(p * p, n + 1, p):
-                primes[i] = False
-        p += 1
-
-    return primes
-
-
-def play_game(n, primes):
-    if n == 1:
-        return False  # Maria loses because there are no prime numbers left to choose
-
-    for prime in primes:
-        if prime <= n:
-            # Maria picks the largest prime number less than or equal to n
-            n -= prime
-
-            if not play_game(n, primes):
-                return True  # Maria wins if Ben loses
-
-            n += prime  # Undo Maria's move if Ben wins
-
-    return False  # Maria loses because there are no prime numbers left to choose
+"""0. Prime Game - Maria and Ben are playing a game"""
 
 
 def isWinner(x, nums):
-    max_n = max(nums)
-    primes = sieve_of_eratosthenes(max_n)
-
-    maria_wins = 0
-    ben_wins = 0
-
-    for n in nums:
-        if play_game(n, primes):
-            maria_wins += 1
-        else:
-            ben_wins += 1
-
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
-    else:
+    """x - rounds
+    nums - numbers list
+    """
+    if x <= 0 or nums is None:
         return None
+    if x != len(nums):
+        return None
+
+    ben = 0
+    maria = 0
+
+    a = [1 for x in range(sorted(nums)[-1] + 1)]
+    a[0], a[1] = 0, 0
+    for i in range(2, len(a)):
+        rm_multiples(a, i)
+
+    for i in nums:
+        if sum(a[0:i + 1]) % 2 == 0:
+            ben += 1
+        else:
+            maria += 1
+    if ben > maria:
+        return "Ben"
+    if maria > ben:
+        return "Maria"
+    return None
+
+
+def rm_multiples(ls, x):
+    """removes multiple
+    of primes
+    """
+    for i in range(2, len(ls)):
+        try:
+            ls[i * x] = 0
+        except (ValueError, IndexError):
+            break
